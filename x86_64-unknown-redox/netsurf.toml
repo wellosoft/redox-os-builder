@@ -1,0 +1,4 @@
+name = "netsurf"
+version = "TODO"
+target = "x86_64-unknown-redox"
+depends = ["ca-certificates", "orbital", "curl", "expat", "freetype2", "libiconv", "libjpeg", "liborbital", "libpng", "nghttp2", "openssl1", "zlib"]

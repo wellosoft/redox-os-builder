@@ -1,0 +1,4 @@
+name = "gnu-binutils"
+version = "TODO"
+target = "x86_64-unknown-redox"
+depends = ["zlib"]

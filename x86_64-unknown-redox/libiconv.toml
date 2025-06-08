@@ -1,0 +1,4 @@
+name = "libiconv"
+version = "TODO"
+target = "x86_64-unknown-redox"
+depends = []

@@ -1,0 +1,4 @@
+name = "git"
+version = "TODO"
+target = "x86_64-unknown-redox"
+depends = ["ca-certificates", "nghttp2", "zlib"]
