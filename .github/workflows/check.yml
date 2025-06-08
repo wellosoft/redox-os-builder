@@ -10,8 +10,8 @@ jobs:
     container:
       image: willnode/redox-os-builder:latest
       options: --privileged  # Remove if not needed
-    volumes:
-     - /mnt:/__w
+      volumes:
+       - /mnt:/__w
     steps:
       - name: Run DF
         run: df -h
