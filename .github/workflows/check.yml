@@ -14,7 +14,6 @@ jobs:
        - /mnt:/mnt
     steps:
       - name: Run DF
-        run: 
         run: |
           df -h
           cd /mnt
