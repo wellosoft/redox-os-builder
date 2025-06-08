@@ -19,10 +19,14 @@ jobs:
           cat /mnt/DATALOSS_WARNING_README.txt
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          path: '/mnt/repo'
       - name: Run DF Again
         run: |
           df -h
+          cp -a $GITHUB_WORKSPACE /mnt/repo
           cd /mnt/repo
           ls -lh
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: /mnt/repo/build
+          publish_branch: gh-pages
