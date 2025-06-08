@@ -1,4 +1,4 @@
-name: Run setup.sh using custom Docker container
+name: Run setup.sh
 
 on:
   workflow_dispatch:
