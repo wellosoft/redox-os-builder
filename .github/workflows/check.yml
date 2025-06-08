@@ -16,15 +16,13 @@ jobs:
       - name: Run DF
         run: |
           df -h
-          cd /mnt
-          ls -lh
-          rm -rf /mnt/*
+          cat /mnt/DATALOSS_WARNING_README.txt
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          path: '/mnt'
+          path: '/mnt/repo'
       - name: Run DF Again
         run: |
           df -h
-          cd /mnt
+          cd /mnt/repo
           ls -lh
