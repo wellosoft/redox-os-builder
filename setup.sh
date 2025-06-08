@@ -5,4 +5,5 @@ git clone https://gitlab.redox-os.org/willnode/redox -b faster-libtool-clone --d
 export PATH=$HOME/.cargo/bin:$PATH
 . redox/podman/rustinstall.sh
 cp config ./redox/.config
-(cd redox && make build/x86_64/base/repo.tag)
+cp -a build ./redox/build
+(cd redox && make build/x86_64/demo/repo.tag)
