@@ -11,11 +11,21 @@ jobs:
       image: willnode/redox-os-builder:latest
       options: --privileged  # Remove if not needed
       volumes:
-       - /mnt:/__w
+       - /mnt:/mnt
     steps:
       - name: Run DF
-        run: df -h
+        run: 
+        run: |
+          df -h
+          cd /mnt
+          ls -lh
+          rm -rf /mnt/*
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          path: '/mnt'
       - name: Run DF Again
-        run: df -h
+        run: |
+          df -h
+          cd /mnt
+          ls -lh
