@@ -25,8 +25,3 @@ jobs:
           cp -a $GITHUB_WORKSPACE /mnt/repo
           cd /mnt/repo
           ls -lh
-      - uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: /mnt/repo/build
-          publish_branch: gh-pages

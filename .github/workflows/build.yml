@@ -9,16 +9,22 @@ jobs:
 
     container:
       image: willnode/redox-os-builder:latest
-      options: --privileged  # Remove if not needed
+      options: --privileged   # Remove if not needed
+      volumes:
+       - /mnt:/mnt
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Run setup.sh
-        run: bash ./setup.sh
+        run: |
+          cp -a $GITHUB_WORKSPACE /mnt/repo
+          cd /mnt/repo
+          bash ./setup.sh
+          df -h
       - name: Push to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./redox/cookbook/repo
+          publish_dir: /mnt/repo/redox/cookbook/repo
           publish_branch: gh-pages
