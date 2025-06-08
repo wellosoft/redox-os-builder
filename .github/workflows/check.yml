@@ -1,0 +1,25 @@
+name: Check space
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run DF
+        run: df -h
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true          
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+      - name: Run DF Again
+        run: df -h
+  
