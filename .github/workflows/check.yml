@@ -7,19 +7,15 @@ jobs:
   run-setup:
     runs-on: ubuntu-latest
 
+    container:
+      image: willnode/redox-os-builder:latest
+      options: --privileged  # Remove if not needed
+    volumes:
+     - /mnt:/__w
     steps:
       - name: Run DF
         run: df -h
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
-        with:
-          tool-cache: true          
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: true
-          swap-storage: true
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: Run DF Again
         run: df -h
-  
