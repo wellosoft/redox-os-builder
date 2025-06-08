@@ -2,6 +2,7 @@
 
 git clone https://gitlab.redox-os.org/willnode/redox -b personal --depth 1
 git -C redox submodule update --init --recursive --depth 1
+sed -i '/--verbose/d' redox/cookbook/src/bin/cook.rs
 export PATH=$HOME/.cargo/bin:$PATH
 . redox/podman/rustinstall.sh
 cp config ./redox/.config
