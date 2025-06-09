@@ -1,8 +1,8 @@
 # Redox OS PKGAR Repository Builder
 
-This is an unofficial repo to build [Redox OS](https://www.redox-os.org/faq/) using GitHub CI. However, this doesn't build into a harddisk file -- the final product is to be the personal remote repository of pkgar files similar to [static.redox-os.org/pkg](https://static.redox-os.org/pkg/).
+This is an unofficial repo to build [Redox OS](https://www.redox-os.org/faq/) using GitHub CI. However, this doesn't build into an `.img` file &mdash; the final product is to be the personal remote repository of pkgar files similar to [static.redox-os.org/pkg](https://static.redox-os.org/pkg/).
 
-One of example build is in [this repo](https://github.com/wellosoft/redox-os-builder/tree/gh-pages). To use it, run `sudo touch "https://wellosoft.github.io/redox-os-builder" > /etc/pkg.d/40_custom` inside Redox OS terminal, that will add that new repo URL besides the official Redox OS repo. (there's caveat to this behavior, read below) which then can be used for `pkg install <package>`.
+One of example build is in [this repo](https://github.com/wellosoft/redox-os-builder/tree/gh-pages). To use it, run `sudo touch "https://wellosoft.github.io/redox-os-builder" > /etc/pkg.d/40_custom` inside Redox OS terminal, that will add that new repo URL besides the official Redox OS repo. (there's [a caveat](#how-to-use-wellosoftgithubio-or-any-custom-repo-path-to-existing-redox-os-installation) to this behavior) which then can be used for `pkg install <package>`.
 
 ## Why?
 
@@ -14,11 +14,13 @@ This creates a problem if you wanted to try Redox OS in a semi permanent way, li
 
 The solution to this problem is you have to setup a pkgar remote endpoint for yourself. A pkgar remote endpoint is similar to  [static.redox-os.org/pkg](https://static.redox-os.org/pkg/), where `pkg`, a Redox OS package manager, fetches the latest changes that is already built by Redox OS maintainers. [static.redox-os.org/pkg](https://static.redox-os.org/pkg/) is the official pkgar remote endpoint but currently it's not linked to any CI, hence waiting maintainers to update it from time to time.
 
-For most people like me that uses Linux to compile Redox OS and doesn't want to nuke the existing Redox OS disk, having a pkgar remote endpoint for myself is essential. It's currently the only way to update Redox OS software without having to maintainers merge your MR let alone updating the official pkgar remote endpoint. This repository will help you **that**, and you don't need any VM, just host it later with GitHub CI is sufficient enough.
+For most people like me that uses Linux to compile Redox OS and doesn't want to nuke the existing Redox OS disk, having a pkgar remote endpoint for myself is essential. It's currently the only way to update Redox OS software without having to maintainers merge your MR let alone updating the official pkgar remote endpoint. This repository will help you *that*, and you don't need any VM, just host it later with GitHub CI is sufficient enough.
 
 ## How?
 
-A preview of my personal pkgar remote endpoint is in [the other repo](https://github.com/wellosoft/redox-os-builder/tree/gh-pages), and I only update it when I need it. To make your own version, please fork this reposity.
+A preview of my personal pkgar remote endpoint is in [the other repo](https://github.com/wellosoft/redox-os-builder/tree/gh-pages), and I only update it when I need it. To make your own version, please fork this repository.
+
+#### Building custom pkgar remote endpoint with GitHub CI
 
 The CI responsible to building pkgar files is in [build.yml](./.github/workflows/build.yml). The build system follows the same principle as you would do by running `make rebuild` in Redox OS repo. The difference is the process stopped once all pkgar cook all software you want to build and all pkgar artifacts is served via GitHub Pages.
 
@@ -30,6 +32,9 @@ In the `setup.sh` I choose `git clone https://gitlab.redox-os.org/willnode/redox
 - [Some changes](https://gitlab.redox-os.org/redox-os/redox/-/merge_requests/1584) To speed up libtool cloning
 
 You can change the repo URL and branch once you have your own fork with these MRs mentioned.
+
+
+#### Trying out the custom pkgar remote endpoint
 
 If you want to use my personal or your own pkgar remote endpoint, you need a build of Redox OS that have [a patched pkgutils](https://gitlab.redox-os.org/redox-os/pkgutils/-/merge_requests/52) that will work with repo URLs other than `static.redox-os.org`. 
 
@@ -44,6 +49,12 @@ redox-pkg = { path = "../pkgutils/pkg-lib" }
 ```
 
 ## FAQ
+
+#### How to use `wellosoft.github.io` or any custom repo path to existing Redox OS installation?
+
+Currently it's not possible until the required MR merged and compiled.
+
+If you have compiling the patched pkgutils and it's inside that Redox OS, run `sudo touch "https://wellosoft.github.io/redox-os-builder" > /etc/pkg.d/40_custom` in the terminal.
 
 #### How to test this build system locally?
 
