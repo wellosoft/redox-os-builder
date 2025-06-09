@@ -2,7 +2,7 @@
 
 This is an unofficial repo to build [Redox OS](https://www.redox-os.org/faq/) using GitHub CI. However, this doesn't build into an `.img` file &mdash; the final product is to be the personal remote repository of pkgar files similar to [static.redox-os.org/pkg](https://static.redox-os.org/pkg/).
 
-One of example build is in [this repo](https://github.com/wellosoft/redox-os-builder/tree/gh-pages). To use it, run `sudo touch "https://wellosoft.github.io/redox-os-builder" > /etc/pkg.d/40_custom` inside Redox OS terminal, that will add that new repo URL besides the official Redox OS repo. (there's [a caveat](#how-to-use-wellosoftgithubio-or-any-custom-repo-path-to-existing-redox-os-installation) to this behavior) which then can be used for `pkg install <package>`.
+One of example build is in [this repo](https://github.com/wellosoft/redox-os-builder/tree/gh-pages). To use it, run `sudo echo "https://wellosoft.github.io/redox-os-builder" > /etc/pkg.d/40_custom` inside Redox OS terminal, that will add that new repo URL besides the official Redox OS repo. (there's [a caveat](#how-to-use-wellosoftgithubio-or-any-custom-repo-path-to-existing-redox-os-installation) to this behavior) which then can be used for `pkg install <package>`.
 
 ## Why?
 
@@ -54,7 +54,7 @@ redox-pkg = { path = "../pkgutils/pkg-lib" }
 
 Currently it's not possible until the required MR merged and compiled.
 
-If you have compiling the patched pkgutils and it's inside that Redox OS, run `sudo touch "https://wellosoft.github.io/redox-os-builder" > /etc/pkg.d/40_custom` in the terminal.
+If you have compiling the patched pkgutils and it's inside that Redox OS, run `sudo echo "https://wellosoft.github.io/redox-os-builder" > /etc/pkg.d/40_custom` in the terminal.
 
 #### How to test this build system locally?
 
