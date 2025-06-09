@@ -9,9 +9,12 @@ jobs:
 
     container:
       image: willnode/redox-os-builder:latest
-      options: --privileged   # Remove if not needed
       volumes:
        - /mnt:/mnt
+
+    env:
+      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
 
     steps:
       - name: Checkout repository
