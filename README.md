@@ -84,6 +84,22 @@ Note that GitHub secrets can't have multi line so you need to replace it with co
 salt = "XXX", nonce = "YYY", skey = "ZZZ"
 ```
 
+#### Can I cook all recipes with GitHub CI?
+
+Interesting question. [The last build](https://github.com/wellosoft/redox-os-builder/actions/runs/15524250457/job/43701576712) took 90 minutes with 25GB storage on `/mnt` storage. The GitHub CI is generous enough even without subscription. Free GitHub account gives you free 2000 minutes CI and apparently 70GB in `/mnt` storage. [Just read here](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories) for GitHub runners.
+
+Generally I think you can cook all recipes if you wish, but it will definitely take longer. Currently I don't cook compilers like LLVM, Cargo and RustPython or even other stuff like games because it's not necessary to me yet.
+
+Of 90 minutes cook recipe from last build, it consist of 8 minutes building tooling and 7 minutes on fetching. It's counting about 66 recipes. The detailed timeline is this:
+
+```
+2025-06-09T00:41:32.5758317Z - start
+2025-06-09T00:49:36.7999268Z - prefix done
+2025-06-09T00:56:27.9442671Z - fetch.sh done
+2025-06-09T02:09:39.2612776Z - repo.sh done
+2025-06-09T02:09:47.8987185Z - done
+```
+
 #### How to do incremental build?
 
 TODO
