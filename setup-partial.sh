@@ -16,5 +16,5 @@ fi
 
 targets="$@"
 prefixed_targets=$(for t in $targets; do echo -n "r.$t "; done)
-(cd redox && make $prefixed_targets)
+(cd redox && make prefix $prefixed_targets)
 cp -a redox/cookbook/build/id_ed25519.pub.toml redox/cookbook/repo/id_ed25519.pub.toml

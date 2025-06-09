@@ -8,7 +8,7 @@ on:
         required: true
 
 jobs:
-  run-setup:
+  run-setup-partial:
     runs-on: ubuntu-latest
 
     container:
