@@ -3,3 +3,6 @@ CONFIG_NAME=dev
 PREFIX_BINARY=1
 PODMAN_BUILD=0
 REPO_NONSTOP=--nonstop
+
+REDOX_REPO=https://gitlab.redox-os.org/willnode/redox
+REDOX_BRANCH=personal
