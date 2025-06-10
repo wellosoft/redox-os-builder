@@ -102,5 +102,6 @@ Of 90 minutes cook recipe from last build, it consist of 8 minutes building tool
 
 #### How to do incremental build?
 
-TODO
+Incremental builds requires `PRIVATE_KEY` and `PUBLIC_KEY` set since initial full build. You can't set it after initial full build otherwise the public keys will be invalid for old pkgar files.
 
+After pushing your own changes in the repo, you can run `Run setup-partial.sh` GitHub Action. There will be an input about list of recipes you want to update &mdash; for example if you put "nano vim" then the CI will run `make prefix f.nano r.nano f.vim r.vim` and updates the repo files and repo.toml accordingly.
