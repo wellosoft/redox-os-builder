@@ -33,12 +33,17 @@ In the `setup.sh` I choose `git clone https://gitlab.redox-os.org/willnode/redox
 
 You can change the repo URL and branch once you have your own fork with these MRs mentioned.
 
+After a full build you can do [incremental building](#how-to-do-incremental-build) next time.
 
 #### Trying out the custom pkgar remote endpoint
 
 If you want to use my personal or your own pkgar remote endpoint, you need a build of Redox OS that have [a patched pkgutils](https://gitlab.redox-os.org/redox-os/pkgutils/-/merge_requests/52) that will work with repo URLs other than `static.redox-os.org`. 
 
-The easiest way to do that is do `git clone https://gitlab.redox-os.org/willnode/redox -b personal` and perform `make qemu` there. The branch includes
+The easiest way to do that is use [my prebuilt redox disk](https://drive.google.com/file/d/1d07z7-zyMgQ9VVP0E0QVPDlgus7SbRo6/view?usp=sharing). It's a qcow2 disk for desktop-minimal Redox OS with a shell script to run it with QEMU. (If you found problem: replace cpu spec with `-accel tcg -cpu max`).
+
+After running the disk please first run `sudo pkg install pkgutils relibc` then after that do install any pkgs you want.
+
+Alternatively, you can build the disk locally by `git clone https://gitlab.redox-os.org/willnode/redox -b personal` and perform `make qemu` there. The branch includes
 - [Some changes](https://gitlab.redox-os.org/willnode/redox/-/blob/personal/config/base.toml) in the base config to add `https://wellosoft.github.io/redox-os-builder` repo (you can change this to your own repo too)
 - Some changes in the base config also, to add `touch /tmp/pkg_download/prefer_cache`, a way to [skip redownloading packages](https://gitlab.redox-os.org/redox-os/pkgutils/-/merge_requests/52) from remote until reboot
 - Some changes in the cookbook to include patched pkgutils
@@ -106,6 +111,6 @@ Incremental builds requires `PRIVATE_KEY` and `PUBLIC_KEY` set since initial ful
 
 After pushing your own changes in the repo, you can run `Run setup-partial.sh` GitHub Action. There will be an input about list of recipes you want to update &mdash; for example if you put "nano vim" then the CI will run `make prefix f.nano r.nano f.vim r.vim` and updates the repo files and repo.toml accordingly.
 
-### How to extract pkgar files manually?
+#### How to extract pkgar files manually?
 
 I think there's no tool for that yet, but I made [online viewer](https://willnode.github.io/pkgar-analyzer/) for it.
