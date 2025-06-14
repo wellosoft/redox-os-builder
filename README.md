@@ -8,7 +8,7 @@ One of example build is in [this repo](https://github.com/wellosoft/redox-os-bui
 
 > Please try [building Redox OS](https://doc.redox-os.org/book/podman-build.html) if you haven't try it before
 
-Redox OS is unstable (0.x as of this written). The quickest way to try the latest version is to spin QEMU in [their latest demo images](https://static.redox-os.org/img/x86_64/) but to involve into Redox OS development most will try to build images from [the GitLab main repo](https://gitlab.redox-os.org/redox-os/redox/).
+Redox OS is unstable (0.x as of this written). The quickest way to try the latest version is to spin QEMU in [their latest demo images](https://static.redox-os.org/img/x86_64/) but to involve into Redox OS development one must build images from [the GitLab main repo](https://gitlab.redox-os.org/redox-os/redox/).
 
 This creates a problem if you wanted to try Redox OS in a semi permanent way, like to install it to a bare metal machine or just to keep the OS live a little longer along with your personal files inside &mdash; because every time you made changes, even a simple cookbook recipe, you have to rebuild the disk, hence you'll lost all changes inside the disk previously.
 
@@ -26,12 +26,7 @@ The CI responsible to building pkgar files is in [build.yml](./.github/workflows
 
 The software I want to build is specified in [config](./config) and [setup.sh](./setup.sh) files. The `setup.sh` specifies what Redox OS repo URL and branch to clone from, and  [config](./config) specified what config and arch to choose.
 
-In the `setup.sh` I choose `git clone https://gitlab.redox-os.org/willnode/redox -b personal` because it contains:
-- My own `dev` config, including standard desktop config + nano + vim + curl without compilers (yet)
-- [Some changes](https://gitlab.redox-os.org/redox-os/cookbook/-/merge_requests/503) that fixes problem when building inside GitHub CI
-- [Some changes](https://gitlab.redox-os.org/redox-os/redox/-/merge_requests/1584) To speed up libtool cloning
-
-You can change the repo URL and branch once you have your own fork with these MRs mentioned.
+In the `setup.sh` I choose `git clone https://gitlab.redox-os.org/willnode/redox -b personal` because it contains my preferred setup and some yet-to-be-merged patches. You can change the repo URL and branch at your own fork.
 
 After a full build you can do [incremental building](#how-to-do-incremental-build) next time.
 
@@ -47,11 +42,6 @@ Alternatively, you can build the disk locally by `git clone https://gitlab.redox
 - [Some changes](https://gitlab.redox-os.org/willnode/redox/-/blob/personal/config/base.toml) in the base config to add `https://wellosoft.github.io/redox-os-builder` repo (you can change this to your own repo too)
 - Some changes in the base config also, to add `touch /tmp/pkg_download/prefer_cache`, a way to [skip redownloading packages](https://gitlab.redox-os.org/redox-os/pkgutils/-/merge_requests/52) from remote until reboot
 - Some changes in the cookbook to include patched pkgutils
-- Note: the installer also need to be patched (not included in this branch). Do `git clone https://gitlab.redox-os.org/willnode/pkgutils -b skip-if-exists` Add this to `installer/Cargo.toml` and do `rm -rf build/fstools`:
-
-```
-redox-pkg = { path = "../pkgutils/pkg-lib" }
-```
 
 ## FAQ
 
