@@ -16,6 +16,8 @@ The solution to this problem is you have to setup a pkgar remote endpoint for yo
 
 For most people like me that uses Linux to compile Redox OS and doesn't want to nuke the existing Redox OS disk, having a pkgar remote endpoint for myself is essential. It's currently the only way to update Redox OS software without having to maintainers merge your MR let alone updating the official pkgar remote endpoint. This repository will help you *that*, and you don't need any VM, just host it later with GitHub CI is sufficient enough.
 
+Another reason is because my laptop is a potato and I need to put most compilation process off from my machine.
+
 ## How?
 
 A preview of my personal pkgar remote endpoint is in [the other repo](https://github.com/wellosoft/redox-os-builder/tree/gh-pages), and I only update it when I need it. To make your own version, please fork this repository.
