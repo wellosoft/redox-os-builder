@@ -24,7 +24,7 @@ jobs:
           echo "verbose = off" > $HOME/.wgetrc
           cp -a $GITHUB_WORKSPACE /mnt/repo
           cd /mnt/repo
-          bash ./setup.sh
+          bash ./setup-full.sh
           df -h
       - name: Push to gh-pages
         uses: peaceiris/actions-gh-pages@v4

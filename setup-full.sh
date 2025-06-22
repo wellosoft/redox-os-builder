@@ -10,6 +10,5 @@ else
   echo "\$PRIVATE_KEY or \$PUBLIC_KEY is not set! Skipping key write."
 fi
 
-# must sync with config: build/<ARCH>/<CONFIG>/repo.tag
-(cd redox && make build/$ARCH/$CONFIG_NAME/repo.tag)
+(cd redox && make repo)
 cp -a redox/cookbook/build/id_ed25519.pub.toml redox/cookbook/repo/id_ed25519.pub.toml
