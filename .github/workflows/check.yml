@@ -6,22 +6,15 @@ on:
 jobs:
   run-setup:
     runs-on: ubuntu-latest
-
     container:
       image: willnode/redox-os-builder:latest
-      options: --privileged  # Remove if not needed
+      options: --cap-add SYS_ADMIN --device /dev/fuse
       volumes:
        - /mnt:/mnt
     steps:
-      - name: Run DF
+      - name: Check fuse
         run: |
           df -h
           cat /mnt/DATALOSS_WARNING_README.txt
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Run DF Again
-        run: |
-          df -h
-          cp -a $GITHUB_WORKSPACE /mnt/repo
-          cd /mnt/repo
-          ls -lh
+          ls /dev
+          ls /dev/fuse
