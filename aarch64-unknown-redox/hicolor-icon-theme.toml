@@ -1,0 +1,4 @@
+name = "hicolor-icon-theme"
+version = "TODO"
+target = "aarch64-unknown-redox"
+depends = []

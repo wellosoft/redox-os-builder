@@ -1,0 +1,4 @@
+name = "installer-gui"
+version = "TODO"
+target = "aarch64-unknown-redox"
+depends = []
