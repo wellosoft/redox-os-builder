@@ -1,4 +1,4 @@
-name: Run setup.sh
+name: Run setup-full.sh
 
 on:
   workflow_dispatch:
