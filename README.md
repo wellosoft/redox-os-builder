@@ -4,7 +4,7 @@ Unofficial Redox OS Repository Builder, builds these in GitHub CI:
 - Packages similar to [static.redox-os.org/pkg](https://static.redox-os.org/pkg/)
 - Toolchains similar to [static.redox-os.org/toolchain](https://static.redox-os.org/toolchain/)
 
-My personal repo is at [wellosoft/redox-os-builder](https://github.com/wellosoft/redox-os-builder). To use my repo, run `sudo echo "https://wellosoft.github.io/redox-os-builder" > /etc/pkg.d/40_custom` inside Redox OS terminal
+My personal repo is at [wellosoft/redox-os-builder](https://github.com/wellosoft/redox-os-builder). To use my repo packages, run `sudo echo "https://wellosoft.github.io/redox-os-builder" > /etc/pkg.d/40_custom` inside Redox OS terminal
 
 As of June 2025, Redox OS supports custom repository.
 
@@ -16,6 +16,8 @@ As of June 2025, Redox OS supports custom repository.
 ## How?
 
 A preview of my personal pkgar remote endpoint is in [the other repo](https://github.com/wellosoft/redox-os-builder/tree/gh-pages), and I only update it when I need it. To make your own version, please fork this repository.
+
+I also toolchain that made for aarch64 linux in [my personal server](https://redox-build.wellosoft.net/toolchain/) so Podman can run the toolchain without Rosetta in Mac OS. To use it, adjust relevant constants in `mk/config.mk` and `mk/prefix.mk`.
 
 #### Trying out
 
