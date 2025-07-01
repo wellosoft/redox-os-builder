@@ -31,9 +31,8 @@ jobs:
       - name: Run setup-toolchain.sh
         run: |
           echo "verbose = off" > $HOME/.wgetrc
-          cp -a $GITHUB_WORKSPACE/repo /mnt/repo
-          cd /mnt/repo
-          bash ./setup-toolchain.sh
+          rm -rf /mnt/repo; cp -a $GITHUB_WORKSPACE/repo /mnt/repo
+          cd /mnt/repo; bash ./setup-toolchain.sh
           df -h
 
       - name: Push via SCP
