@@ -13,7 +13,7 @@ jobs:
         - /mnt:/mnt
 
     env:
-      SSH_SCP_PATH: ${{ env.SSH_SCP_PATH }}
+      SSH_SCP_PATH: ${{ vars.SSH_SCP_PATH }}
 
     steps:
       - name: Checkout repository
