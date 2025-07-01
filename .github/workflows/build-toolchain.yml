@@ -1,0 +1,38 @@
+name: Run setup-toolchain.sh
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-setup-partial:
+    runs-on: ubuntu-latest
+
+    container:
+      image: willnode/redox-os-builder:latest
+      volumes:
+        - /mnt:/mnt
+
+    env:
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      SSH_SCP_PATH: ${{ secrets.SSH_SCP_PATH }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          path: repo
+
+      - name: Run setup-toolchain.sh
+        run: |
+          echo "verbose = off" > $HOME/.wgetrc
+          cp -a $GITHUB_WORKSPACE/repo /mnt/repo
+          cd /mnt/repo
+          bash ./setup-toolchain.sh
+          df -h
+
+      - name: Push via SCP (if SSH_PRIVATE_KEY is set)
+        run: |
+          echo "$SSH_PRIVATE_KEY" > /tmp/private_key
+          chmod 600 /tmp/private_key
+          export SSH_CMD="scp -r -o StrictHostKeyChecking=no -i /tmp/private_key"
+          $SSH_CMD /mnt/repo/toolchain/* $SSH_SCP_PATH
