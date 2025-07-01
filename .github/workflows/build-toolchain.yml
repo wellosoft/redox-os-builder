@@ -13,14 +13,20 @@ jobs:
         - /mnt:/mnt
 
     env:
-      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      SSH_SCP_PATH: ${{ secrets.SSH_SCP_PATH }}
+      SSH_SCP_PATH: ${{ env.SSH_SCP_PATH }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           path: repo
+
+      - name: Setup and Test SCP
+        run: |
+          mkdir -p $HOME/.ssh; (echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/.ssh/id_rsa); chmod 0600 $HOME/.ssh/id_rsa;
+          export SSH_CMD="scp -r -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa"
+          TARGET=/mnt/repo/toolchain; mkdir -p $TARGET; echo "hello" > $TARGET.test
+          $SSH_CMD $TARGET.test $SSH_SCP_PATH
 
       - name: Run setup-toolchain.sh
         run: |
@@ -30,9 +36,7 @@ jobs:
           bash ./setup-toolchain.sh
           df -h
 
-      - name: Push via SCP (if SSH_PRIVATE_KEY is set)
+      - name: Push via SCP
         run: |
-          echo "$SSH_PRIVATE_KEY" > /tmp/private_key
-          chmod 600 /tmp/private_key
-          export SSH_CMD="scp -r -o StrictHostKeyChecking=no -i /tmp/private_key"
+          export SSH_CMD="scp -r -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa"
           $SSH_CMD /mnt/repo/toolchain/* $SSH_SCP_PATH
