@@ -4,9 +4,7 @@ Unofficial Redox OS Repository Builder, builds these in GitHub CI:
 - Packages similar to [static.redox-os.org/pkg](https://static.redox-os.org/pkg/)
 - Toolchains similar to [static.redox-os.org/toolchain](https://static.redox-os.org/toolchain/)
 
-My personal repo is at [wellosoft/redox-os-builder](https://github.com/wellosoft/redox-os-builder). To use my repo packages, run `sudo echo "https://wellosoft.github.io/redox-os-builder" > /etc/pkg.d/40_custom` inside Redox OS terminal
-
-As of June 2025, Redox OS supports custom repository.
+As of June 2025, Redox OS supports custom repository, see [how](#how).
 
 ## Why?
 
@@ -15,21 +13,19 @@ As of June 2025, Redox OS supports custom repository.
 
 ## How?
 
-A preview of my personal pkgar remote endpoint is in [the other repo](https://github.com/wellosoft/redox-os-builder/tree/gh-pages), and I only update it when I need it. To make your own version, please fork this repository.
+I have prebuilt package repos and toolchain.
 
-I also toolchain that made for aarch64 linux in [my personal server](https://redox-build.wellosoft.net/toolchain/) so Podman can run the toolchain without Rosetta in Mac OS. To use it, adjust relevant constants in `mk/config.mk` and `mk/prefix.mk`.
+To use my prebuilt package in existing RedoxOS:
 
-#### Trying out
+1. Download and run latest images
+2. Run `sudo echo "https://wellosoft.github.io/redox-os-builder" > /etc/pkg.d/40_custom`
+3. Run `sudo pkg install ...` any pkgs you want
 
-You can use [my prebuilt redox disk](https://drive.google.com/file/d/1d07z7-zyMgQ9VVP0E0QVPDlgus7SbRo6/view?usp=sharing). It's a qcow2 disk for desktop-minimal Redox OS with a shell script to run it with QEMU. (If you found problem: replace cpu spec with `-accel tcg -cpu max`).
+The packages artifacts is in [the other repo](https://github.com/wellosoft/redox-os-builder/tree/gh-pages), and I only update it when I need it. To make your own version, please fork this repository.
 
-After running the disk please first run `sudo pkg install pkgutils relibc` then after that do install any pkgs you want.
+I also built toolchain that made for `aarch64-unknown-linux-gnu` hosts in [my personal server](https://redox-build.wellosoft.net/toolchain/) so Podman in MacOS can run the toolchain without Rosetta. To use it, adjust relevant constants in `mk/config.mk` and `mk/prefix.mk`.
 
 ## FAQ
-
-#### How to use `wellosoft.github.io` or any custom repo path to existing Redox OS installation?
-
-If you have compiling the patched pkgutils and it's inside that Redox OS, run `sudo echo "https://wellosoft.github.io/redox-os-builder" > /etc/pkg.d/40_custom` in the terminal.
 
 #### How to test this build system locally?
 
@@ -37,7 +33,7 @@ Fork, clone this repo, and run `bash setup-full.sh`.
 
 #### I made a fork and made adjustments, how to retrigger build?
 
-Go to `Actions` tab and enable CI there. Then, go to `Run setup.sh` and click `Run Workflow`.
+Go to `Actions` tab and enable CI there. Then, go to `Run setup-full.sh` and click `Run Workflow`.
 
 Make sure the GitHub action [has read and write](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token) access (the menu is in Settings > Actions > \[scroll down\] Read and write permissions).
 
