@@ -19,3 +19,5 @@ fi
 
 (cd redox && make repo)
 cp -a $BUILD_DIR/id_ed25519.pub.toml $REPOS_DIR/id_ed25519.pub.toml
+
+sccache -s
