@@ -1,7 +1,8 @@
-ARCH=x86_64
+ARCH=aarch64
 CONFIG_NAME=dev
 PREFIX_BINARY=1
 PODMAN_BUILD=0
+SCCACHE_BUILD=1
 REPO_NONSTOP=--nonstop
 
 REDOX_REPO=https://gitlab.redox-os.org/willnode/redox
