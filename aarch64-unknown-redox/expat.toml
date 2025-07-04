@@ -1,4 +1,0 @@
-name = "expat"
-version = "TODO"
-target = "aarch64-unknown-redox"
-depends = []

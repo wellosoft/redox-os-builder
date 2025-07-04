@@ -1,4 +1,0 @@
-name = "sdl1"
-version = "TODO"
-target = "aarch64-unknown-redox"
-depends = []

@@ -1,4 +1,4 @@
 name = "cosmic-files"
 version = "TODO"
 target = "aarch64-unknown-redox"
-depends = ["gettext", "libxkbcommon"]
+depends = ["gettext"]

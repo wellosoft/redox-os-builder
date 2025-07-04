@@ -1,4 +1,0 @@
-name = "libxkbcommon"
-version = "TODO"
-target = "aarch64-unknown-redox"
-depends = ["libxml2"]
