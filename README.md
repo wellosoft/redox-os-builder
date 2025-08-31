@@ -1,4 +1,4 @@
-# Redox OS GitHub Repository Builder
+# Redox OS Builder on GitHub CI
 
 Unofficial Redox OS Repository Builder, builds these in GitHub CI:
 - Packages similar to [static.redox-os.org/pkg](https://static.redox-os.org/pkg/)
