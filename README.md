@@ -23,7 +23,28 @@ To use my prebuilt package in existing RedoxOS:
 
 The packages artifacts is in [the other repo](https://github.com/wellosoft/redox-os-builder/tree/gh-pages), and I only update it when I need it. To make your own version, please fork this repository.
 
-I also built toolchain that made for `aarch64-unknown-linux-gnu` hosts in [my personal server](https://redox-build.wellosoft.net/toolchain/) so Podman in MacOS can run the toolchain without Rosetta. To use it, adjust relevant constants in `mk/config.mk` and `mk/prefix.mk`.
+### Custom Toolchain
+
+I have build toolchains for my own personal use:
+
++ [x86_64 toolchain](https://redox-build.wellosoft.net/toolchain-x86_64/) the toolchain for Intel/AMD linux compatible for Ubuntu/Pop! OS 22
++ [aarch64 toolchain](https://redox-build.wellosoft.net/toolchain-aarch64/) the toolchain for Podman in MacOS without Rosetta, or for other ARM based Linux
+
+To use these toolchain in your Redox build system, please patch `mk/prefix.mk`:
+
+```diff
+-	wget -O $@.partial "https://static.redox-os.org/toolchain/$(TARGET)/relibc-install.tar.gz"
++	wget -O $@.partial "https://redox-build.wellosoft.net/toolchain-$(HOST_ARCH)/$(TARGET)/relibc-install.tar.gz"
+```
+
+And `mk/config.mk` (if your system is aarch64, also see [guide for MacOS](https://gist.github.com/willnode/88da35d0c0542276b4631746d8fc3de1)):
+
+```diff
+-ifneq ($(HOST_TARGET),x86_64-unknown-linux-gnu)
+-    $(info The binary prefix is only built for x86_64 Linux hosts)
++ifneq ($(HOST_TARGET),$(HOST_ARCH)-unknown-linux-gnu)
++    $(info The binary prefix is only built for $(HOST_ARCH) Linux hosts)
+```
 
 ## FAQ
 
