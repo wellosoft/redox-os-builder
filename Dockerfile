@@ -1,9 +1,11 @@
 # Configuration file to install the recipe dependencies inside the Podman container
 
-FROM debian:stable-backports
+FROM ubuntu:jammy
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-	&& apt-get install -y --no-install-recommends -t stable-backports \
+	&& apt-get install -y --no-install-recommends \
 		ant \
 		appstream \
 		appstream-compose \
