@@ -1,0 +1,47 @@
+name: Run setup-partial.sh to Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      recipes:
+        description: 'Recipe names (space separated)'
+        required: true
+
+jobs:
+  run-setup-partial:
+    runs-on: ubuntu-latest
+
+    container:
+      image: willnode/redox-os-builder:latest
+      volumes:
+       - /mnt:/mnt
+
+    env:
+      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          path: repo
+      - name: Checkout gh-pages
+        uses: actions/checkout@v3
+        with:
+          path: artifacts
+          ref: gh-pages
+      - name: Run setup.sh
+        run: |
+          echo "verbose = off" > $HOME/.wgetrc
+          cp -a $GITHUB_WORKSPACE/repo /mnt/repo
+          export ARTIFACTS=$GITHUB_WORKSPACE/artifacts
+          cd /mnt/repo
+          bash ./setup-partial.sh "${{ github.event.inputs.recipes }}"
+          df -h
+      - name: Push to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: /mnt/repo/redox/cookbook/repo
+          publish_branch: gh-pages
+          keep_files: true

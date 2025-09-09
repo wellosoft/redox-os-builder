@@ -11,7 +11,7 @@ if [ -n "$PRIVATE_KEY" ] && [ -n "$PUBLIC_KEY" ]; then
     # copy existing repos (for different arch)
     rm -rf $REPOS_DIR
     cp -a $ARTIFACTS $REPOS_DIR || true
-    rm -rf $REPOS_DIR/.git $REPOS_DIR/$ARCH-unknown-redox
+    rm -rf $REPOS_DIR/.git
   fi
 else
   echo "\$PRIVATE_KEY or \$PUBLIC_KEY is not set! Skipping key write."
