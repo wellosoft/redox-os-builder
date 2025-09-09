@@ -66,7 +66,7 @@ docker buildx build --platform $PLATFORM -f Dockerfile-pkg -t $TAG$:pkg . --push
 docker buildx build --platform $PLATFORM -f Dockerfile-toolchain -t $TAG$:toolchain . --push
 ```
 
-The difference is `pkg` is based on Ubuntu 24 while toolchain is Ubuntu 22 (to allow lower GLIBC).
+The difference is `pkg` is based on Ubuntu 24 (While be using official toolchain which happens to have compatible GLIBC) while toolchain is Ubuntu 22 (to allow lower GLIBC).
 
 #### The build is finished, how to make it available to GitHub Pages?
 
