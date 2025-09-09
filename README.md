@@ -11,17 +11,17 @@ As of June 2025, Redox OS supports custom repository, see [how](#how).
 - I have forks and I wanted to test it without waiting the official build server
 - I don't want to compile heavy packages in my own laptop
 
-## How?
+## Custom Pkg
 
-I have prebuilt package repos and toolchain.
+I have prebuilt packages repos for myself on `https://redox-build.wellosoft.net/pkg/`.
 
 To use my prebuilt package in existing RedoxOS:
 
 1. Download and run latest images
-2. Run `sudo echo "https://wellosoft.github.io/redox-os-builder" > /etc/pkg.d/40_custom`
+2. Run `sudo echo "https://redox-build.wellosoft.net/pkg/" > /etc/pkg.d/40_custom`
 3. Run `sudo pkg install ...` any pkgs you want
 
-The packages artifacts is in [the other repo](https://github.com/wellosoft/redox-os-builder/tree/gh-pages), and I only update it when I need it. To make your own version, please fork this repository.
+To make your own version, please fork this repository.
 
 ### Custom Toolchain
 
@@ -57,6 +57,16 @@ Fork, clone this repo, and run `bash setup-full.sh`.
 Go to `Actions` tab and enable CI there. Then, go to `Run setup-full.sh` and click `Run Workflow`.
 
 Make sure the GitHub action [has read and write](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token) access (the menu is in Settings > Actions > \[scroll down\] Read and write permissions).
+
+### How do I build my own Dockerfile?
+
+```sh
+env PLARFORM="linux/amd64,linux/arm64" TAG="willnode/redox-os-builder"
+docker buildx build --platform $PLATFORM -f Dockerfile-pkg -t $TAG$:pkg . --push
+docker buildx build --platform $PLATFORM -f Dockerfile-toolchain -t $TAG$:toolchain . --push
+```
+
+The difference is `pkg` is based on Ubuntu 24 while toolchain is Ubuntu 22 (to allow lower GLIBC).
 
 #### The build is finished, how to make it available to GitHub Pages?
 
