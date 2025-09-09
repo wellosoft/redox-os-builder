@@ -60,6 +60,8 @@ Make sure the GitHub action [has read and write](https://docs.github.com/en/acti
 
 ### How do I build my own Dockerfile?
 
+I've [`built them`](https://hub.docker.com/r/willnode/redox-os-builder/tags) this way:
+
 ```sh
 env PLATFORM="linux/amd64,linux/arm64" TAG="willnode/redox-os-builder"
 docker buildx build --platform $PLATFORM -f Dockerfile-pkg -t $TAG:pkg . --push

@@ -7,7 +7,7 @@ jobs:
   run-setup:
     runs-on: ubuntu-latest
     container:
-      image: willnode/redox-os-builder:latest
+      image: willnode/redox-os-builder:pkg
       options: --cap-add SYS_ADMIN --device /dev/fuse
       volumes:
        - /mnt:/mnt

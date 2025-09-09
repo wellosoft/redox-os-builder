@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: willnode/redox-os-builder:latest
+      image: willnode/redox-os-builder:pkg
       volumes:
        - /mnt:/mnt
 
