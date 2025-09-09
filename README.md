@@ -61,9 +61,9 @@ Make sure the GitHub action [has read and write](https://docs.github.com/en/acti
 ### How do I build my own Dockerfile?
 
 ```sh
-env PLARFORM="linux/amd64,linux/arm64" TAG="willnode/redox-os-builder"
-docker buildx build --platform $PLATFORM -f Dockerfile-pkg -t $TAG$:pkg . --push
-docker buildx build --platform $PLATFORM -f Dockerfile-toolchain -t $TAG$:toolchain . --push
+env PLATFORM="linux/amd64,linux/arm64" TAG="willnode/redox-os-builder"
+docker buildx build --platform $PLATFORM -f Dockerfile-pkg -t $TAG:pkg . --push
+docker buildx build --platform $PLATFORM -f Dockerfile-toolchain -t $TAG:toolchain . --push
 ```
 
 The difference is `pkg` is based on Ubuntu 24 (While be using official toolchain which happens to have compatible GLIBC) while toolchain is Ubuntu 22 (to allow lower GLIBC).
