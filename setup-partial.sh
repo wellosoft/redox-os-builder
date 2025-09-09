@@ -15,6 +15,6 @@ else
 fi
 
 targets="$@"
-prefixed_targets=$(for t in $targets; do echo -n "r.$t "; done)
-(cd redox && make prefix $prefixed_targets)
+(export PATH="$PWD/$PREFIX_PATH/bin:$PATH" COOKBOOK_HOST_SYSROOT="$PWD/$PREFIX_PATH" && \
+  cd redox && make prefix && && cd cookbook && ./repo.sh --with-package-deps $targets)
 cp -a $BUILD_DIR/id_ed25519.pub.toml $REPOS_DIR/id_ed25519.pub.toml
