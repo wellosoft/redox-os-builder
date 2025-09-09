@@ -16,5 +16,5 @@ fi
 
 targets="$@"
 (export PATH="$PWD/$PREFIX_PATH/bin:$PATH" COOKBOOK_HOST_SYSROOT="$PWD/$PREFIX_PATH" && \
-  cd redox && make prefix && cd cookbook && ./repo.sh --with-package-deps $targets)
+  cd redox && make prefix fstools && cd cookbook && ./repo.sh --with-package-deps $targets)
 cp -a $BUILD_DIR/id_ed25519.pub.toml $REPOS_DIR/id_ed25519.pub.toml
