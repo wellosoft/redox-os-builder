@@ -33,7 +33,7 @@ jobs:
           export SSH_CMD="scp -r -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa"
           TARGET=/mnt/repo/pkg; mkdir -p $TARGET; echo "hello" > $TARGET/.test
           $SSH_CMD $TARGET/.test $SSH_SCP_PATH/pkg/
-          export $EX_REPO=$GITHUB_WORKSPACE/artifacts/$ARCH-unknown-redox; mkdir -p $EX_REPO
+          export EX_REPO=$GITHUB_WORKSPACE/artifacts/$ARCH-unknown-redox; mkdir -p $EX_REPO
           $SSH_CMD $SSH_SCP_PATH/pkg/$ARCH-unknown-redox/repo.toml $EX_REPO/ || true
 
       - name: Run setup.sh
