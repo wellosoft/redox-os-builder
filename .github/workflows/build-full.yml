@@ -15,6 +15,7 @@ jobs:
     env:
       PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+      SSH_SCP_PATH: ${{ vars.SSH_SCP_PATH }}
 
     steps:
       - name: Checkout repository
