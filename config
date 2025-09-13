@@ -3,5 +3,5 @@ CONFIG_NAME=dev
 PODMAN_BUILD=0
 REPO_NONSTOP=--nonstop
 
-REDOX_REPO=https://gitlab.redox-os.org/redox-os/redox
-REDOX_BRANCH=master
+REDOX_REPO=https://gitlab.redox-os.org/willnode/redox
+REDOX_BRANCH=wasm
