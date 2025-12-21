@@ -42,6 +42,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: /mnt/repo/redox/cookbook/repo
+          publish_dir: /mnt/repo/redox/repo
           publish_branch: gh-pages
           keep_files: true

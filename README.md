@@ -80,7 +80,7 @@ Go to settings, pages, Choose deploy from branch and set the branch as `gh-pages
 
 It's a public key for `pkg` utils verifiying signatures in `.pkgar` files. By default, it's generated and changed every time you want to rebuild.
 
-To persist it across builds, add `PRIVATE_KEY` and `PUBLIC_KEY` to action secrets. The value can be obtained from `cookbook/build/id_ed25519.toml` and `cookbook/build/id_ed25519.pub.toml` after doing local build. 
+To persist it across builds, add `PRIVATE_KEY` and `PUBLIC_KEY` to action secrets. The value can be obtained from `build/id_ed25519.toml` and `build/id_ed25519.pub.toml` after doing local build. 
 
 Note that GitHub secrets can't have multi line so you need to replace it with commas. With that, the typical format for `PRIVATE_KEY` value should be:
 

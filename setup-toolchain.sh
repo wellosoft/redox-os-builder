@@ -5,6 +5,7 @@
 export PREFIX_BINARY=0
 PREFIX=prefix/$ARCH-unknown-redox
 mkdir -p ./toolchain/$ARCH-unknown-redox
-(cd redox && make $PREFIX/rust-install.tar.gz $PREFIX/relibc-install.tar.gz $PREFIX/gcc-install.tar.gz)
-cp -a redox/$PREFIX/rust-install.tar.gz redox/$PREFIX/relibc-install.tar.gz redox/$PREFIX/gcc-install.tar.gz ./toolchain/$ARCH-unknown-redox/
-
+cat redox-gitmodules > redox/.gitmodules
+(cd redox && make $PREFIX/{rust,relibc,gcc}-install.tar.gz)
+cp -a redox/$PREFIX/{rust,relibc,gcc}-install.tar.gz \
+    ./toolchain/$ARCH-unknown-redox/

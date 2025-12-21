@@ -48,4 +48,4 @@ jobs:
       - name: Push via SCP
         run: |
           export SSH_CMD="scp -r -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa"
-          $SSH_CMD /mnt/repo/redox/cookbook/repo/* $SSH_SCP_PATH/pkg/
+          $SSH_CMD /mnt/repo/redox/repo/* $SSH_SCP_PATH/pkg/
