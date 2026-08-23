@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Script to rebuild all pkg of given CONFIG_NAME
+
 . init.sh
 
 if [ -n "$PRIVATE_KEY" ] && [ -n "$PUBLIC_KEY" ]; then

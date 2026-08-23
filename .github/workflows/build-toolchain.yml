@@ -2,6 +2,11 @@ name: Run setup-toolchain.sh
 
 on:
   workflow_dispatch:
+    inputs:
+      archs:
+        description: 'List of ARCH (e.g., "x86_64 aarch64")'
+        required: true
+        default: 'x86_64'
 
 jobs:
   run-setup-partial:
@@ -32,7 +37,7 @@ jobs:
         run: |
           echo "verbose = off" > $HOME/.wgetrc
           rm -rf /mnt/repo; cp -a $GITHUB_WORKSPACE/repo /mnt/repo
-          cd /mnt/repo; bash ./setup-toolchain.sh
+          cd /mnt/repo; bash ./setup-toolchain.sh ${{ inputs.archs }}
           df -h
 
       - name: Push via SCP
