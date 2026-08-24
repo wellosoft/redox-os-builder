@@ -9,7 +9,7 @@ on:
         default: 'x86_64'
 
 jobs:
-  run-setup-partial:
+  run-setup-toolchain:
     runs-on: ubuntu-latest
 
     container:
