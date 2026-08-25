@@ -5,5 +5,5 @@ CI=1
 COOKBOOK_VERBOSE=false
 COOKBOOK_NONSTOP=1
 
-REDOX_REPO=https://gitlab.redox-os.org/redox-os/redox
-REDOX_BRANCH=master
+REDOX_REPO=https://gitlab.redox-os.org/willnode/redox
+REDOX_BRANCH=ldbl-128
