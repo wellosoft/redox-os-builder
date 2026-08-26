@@ -27,7 +27,7 @@ To make your own version, please fork this repository.
 
 ### Custom Toolchain
 
-I have [built toolchains](ttps://redox-build.wellosoft.net/toolchain/) for my own personal use, these toolchain contains these differences:
+I have [built toolchains](https://redox-build.wellosoft.net/toolchain/) for my own personal use, these toolchain contains these differences:
 - Built against Rocky 9, which has glibc 2.34, so this toolchain works for many native build
 - Experimental `long double` as 128 bit on x86_64 redox GCC.
 - (Upcoming) more Aarch64 toolchain target coverage.
