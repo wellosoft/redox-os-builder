@@ -13,6 +13,8 @@ As of June 2025, Redox OS supports custom repository, see [how](#how).
 
 ## Custom Pkg
 
+> Note: My custom build for pkgs are moved to https://gitlab.redox-os.org/-/snippets/2242
+
 I have prebuilt packages repos for myself on `https://redox-build.wellosoft.net/pkg/`.
 
 To use my prebuilt package in existing RedoxOS:
@@ -27,23 +29,19 @@ To make your own version, please fork this repository.
 
 I have build toolchains for my own personal use:
 
-+ [x86_64 toolchain](https://redox-build.wellosoft.net/toolchain-x86_64/) the toolchain for Intel/AMD linux compatible for Ubuntu/Pop! OS 22
-+ [aarch64 toolchain](https://redox-build.wellosoft.net/toolchain-aarch64/) the toolchain for Podman in MacOS without Rosetta, or for other ARM based Linux
++ [x86_64 toolchain](https://redox-build.wellosoft.net/toolchain-x86_64/)
++ [aarch64 toolchain](https://redox-build.wellosoft.net/toolchain-aarch64/)
+
+These toolchain contains these differences:
+- Built against Rocky 9, which has glibc 2.34, so this toolchain works for many native build
+- Experimental `long double` as 128 bit on x86_64 redox GCC.
+- (Upcoming) more Aarch64 toolchain target coverage.
 
 To use these toolchain in your Redox build system, please patch `mk/prefix.mk`:
 
 ```diff
--	wget -O $@.partial "https://static.redox-os.org/toolchain/$(TARGET)/relibc-install.tar.gz"
-+	wget -O $@.partial "https://redox-build.wellosoft.net/toolchain-$(HOST_ARCH)/$(TARGET)/relibc-install.tar.gz"
-```
-
-And `mk/config.mk` (if your system is aarch64, also see [guide for MacOS](https://gist.github.com/willnode/88da35d0c0542276b4631746d8fc3de1)):
-
-```diff
--ifneq ($(HOST_TARGET),x86_64-unknown-linux-gnu)
--    $(info The binary prefix is only built for x86_64 Linux hosts)
-+ifneq ($(HOST_TARGET),$(HOST_ARCH)-unknown-linux-gnu)
-+    $(info The binary prefix is only built for $(HOST_ARCH) Linux hosts)
+-	wget -O $@.partial "https://static.redox-os.org/toolchain/$(HOST_TARGET)/$(TARGET)/$(@F)"
++	wget -O $@.partial "https://redox-build.wellosoft.net/toolchain/$(HOST_ARCH)/$(TARGET)/$(@F)"
 ```
 
 ## FAQ
